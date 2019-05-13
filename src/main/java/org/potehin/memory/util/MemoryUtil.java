@@ -48,14 +48,14 @@ public class MemoryUtil {
         return sizeOfInner(object, checkCycleRef ? new HashSet<>() : null);
     }
 
-    public static long sizeOfInner(Object object, Set<Integer> processedRefs) {
+    public static long sizeOfInner(Object object, Set<Object> processedRefs) {
         long size = 0L;
         if (object != null) {
             if (processedRefs != null) {
-                if (processedRefs.contains(object.hashCode())) {
+                if (processedRefs.contains(object)) {
                     return size;
                 } else {
-                    processedRefs.add(object.hashCode());
+                    processedRefs.add(object);
                 }
             }
             Class<?> clazz = object.getClass();
